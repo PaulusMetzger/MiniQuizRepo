@@ -37,16 +37,34 @@ let questions = [
         choice4: "Один из горизонтов подзолистой почвы",
         answer: 2,
     },
+    {
+        question: "Что такое килеск?",
+        choice1: "Динозавр из Красноярского края",
+        choice2: "Кость стопы лошади",
+        choice3: "Один из спутников Сатурна",
+        choice4: "Опорная балка горизонтального штрека",
+        answer: 1,
+    },
+    {
+        question: "Что обозначает слово темноспондил?",
+        choice1: "Сульфид олова",
+        choice2: "Гетерохромный кристалл минерала апатита",
+        choice3: "Вымершая группа крупных водных амфибий",
+        choice4: "Метеорит упавший в Аргентине",
+        answer: 2,
+    },
 ];
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 3;
+// Выбираем два случайных вопроса из массива
+const randomQuestions = chooseRandomQuestions(questions, MAX_QUESTIONS);
 
 startGame = () => {
     questionCounter = 0;
     score = 0;
-    availableQuesions = [...questions];
+    availableQuesions = [...randomQuestions];
     getNewQuestion();
     game.classList.remove('hidden');
     loader.classList.add('hidden');
@@ -104,5 +122,17 @@ incrementScore = (num) => {
     score += num;
     scoreText.innerText = score;
 };
+
+// Функция для выбора случайных двух вопросов
+function chooseRandomQuestions(arr, num) {
+    const result = [];
+    const copyArr = [...arr];
+    for (let i = 0; i < num; i++) {
+        const randomIndex = Math.floor(Math.random() * copyArr.length);
+        result.push(copyArr[randomIndex]);
+        copyArr.splice(randomIndex, 1);
+    }
+    return result;
+}
 
 startGame();
