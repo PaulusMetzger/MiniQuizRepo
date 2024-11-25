@@ -35,20 +35,14 @@
     <script src="end.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </body>
-<script>
-    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма    
-       
-    tg.showAlert('Нажмите на кнопку внизу приложения чтобы сохранить результаты');    
-    //tg.MainButton.text = "Changed Text"; //изменяем текст кнопки 
-    tg.MainButton.setText("Закрыть и вернуться"); //изменяем текст кнопки иначе
-    //tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
-    //tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
-    //tg.MainButton.setParams({"color": "#143F6B"}); //так изменяются все параметры
+<script>      
+    tg.showAlert('Нажмите на кнопку внизу приложения чтобы сохранить результаты'); 
+    tg.MainButton.setText("Закрыть и вернуться"); //изменяем текст кнопки иначе    
     tg.MainButton.show()
-    const mostRecentScore = localStorage.getItem('mostRecentScore');
+    const finalScore = localStorage.getItem('mostRecentScore');
    
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        tg.sendData("MQ "+ mostRecentScore); 
+        tg.sendData("MQ "+ finalScore); 
         //при клике на основную кнопку отправляем данные в строковом виде
     }); 
    
