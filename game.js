@@ -11,44 +11,37 @@ let score = 0;
 let questionCounter = 0;
 let availableQuesions = [];
 
-let questions = [];
-
-fetch('questions.json'
-    //'https://opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple'
-)
-    .then((res) => {
-        return res.json();
-    })
-    .then((loadedQuestions) => {
-        questions = loadedQuestions.results.map((loadedQuestion) => {
-            const formattedQuestion = {
-                question: loadedQuestion.question,
-            };
-
-            const answerChoices = [...loadedQuestion.incorrect_answers];
-            formattedQuestion.answer = Math.floor(Math.random() * 4) + 1;
-            answerChoices.splice(
-                formattedQuestion.answer - 1,
-                0,
-                loadedQuestion.correct_answer
-            );
-
-            answerChoices.forEach((choice, index) => {
-                formattedQuestion['choice' + (index + 1)] = choice;
-            });
-
-            return formattedQuestion;
-        });
-
-        startGame();
-    })
-    .catch((err) => {
-        console.error(err);
-    });
+let questions = [
+    {
+        question: 'Что такое микориза?',
+        choice1: 'Симбиоз грибницы и корней',
+        choice2: 'Птица из семейства колибри',
+        choice3: 'Программа браузер',
+        choice4: 'Одна из аминокислот',
+        answer: 1,
+    },
+    {
+        question:
+            "Что такое геликоприон?",
+        choice1: "Английский головной убор",
+        choice2: "Нож для открывания устриц",
+        choice3: "Род вымерших хрящевых рыб",
+        choice4: "Имя кота академика Карпинского",
+        answer: 3,
+    },
+    {
+        question: "Что такое фанерозой?",
+        choice1: "Деревянный слой в подиуме модели из технического собрания",
+        choice2: "Эпоха в геохронологической шкале",
+        choice3: "Личинка трилобита",
+        choice4: "Один из горизонтов подзолистой почвы",
+        answer: 2,
+    },
+];
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 10;
+const MAX_QUESTIONS = 3;
 
 startGame = () => {
     questionCounter = 0;
@@ -111,3 +104,5 @@ incrementScore = (num) => {
     score += num;
     scoreText.innerText = score;
 };
+
+startGame();
