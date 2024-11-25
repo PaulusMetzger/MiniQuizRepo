@@ -39,10 +39,10 @@
     tg.showAlert('Нажмите на кнопку внизу приложения чтобы сохранить результаты'); 
     tg.MainButton.setText("Закрыть и вернуться"); //изменяем текст кнопки иначе    
     tg.MainButton.show()
-    const finalScore = localStorage.getItem('mostRecentScore');
+    let yourScore = document.getElementById('finalScore').textContent;
    
     Telegram.WebApp.onEvent('mainButtonClicked', function(){
-        tg.sendData("MQ "+ finalScore); 
+        tg.sendData("MQ "+ yourScore); 
         //при клике на основную кнопку отправляем данные в строковом виде
     }); 
    
