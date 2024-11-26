@@ -433,6 +433,17 @@ getNewQuestion = () => {
 
     const questionIndex = Math.floor(Math.random() * availableQuesions.length);
     currentQuestion = availableQuesions[questionIndex];
+
+    // Изменение места правильного ответа
+    var randomNumber = Math.floor(Math.random() * 4);
+    var answerIndex = parseInt(currentQuestion.answer) - 1;
+    var choicesList = [currentQuestion.choice1, currentQuestion.choice2, currentQuestion.choice3, currentQuestion.choice4];
+    var tempValue = choicesList[randomNumber];
+    choicesList[randomNumber] = choicesList[answerIndex];
+    choicesList[answerIndex] = tempValue;
+    [currentQuestion.choice1, currentQuestion.choice2, currentQuestion.choice3, currentQuestion.choice4] = choicesList;
+    currentQuestion.answer = randomNumber + 1;
+        
     question.innerText = currentQuestion.question;
 
     choices.forEach((choice) => {
